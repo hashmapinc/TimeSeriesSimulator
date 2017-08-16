@@ -1,4 +1,6 @@
-<img src="https://hashmapinc.github.io/hashmap.github.io/images/tempus/Tempus_Black.png" width="250" height="306" alt="Hashmap, Inc Tempus"/>
+<img src="https://github.com/hashmapinc/hashmap.github.io/blob/master/images/tempus/Tempus_Logo_Black_with_TagLine.png" width="950" height="245" alt="Hashmap, Inc Tempus"/>
+
+[![License](http://img.shields.io/:license-Apache%202-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 
 # TimeSeries Simulator
 This is a wrapper around the TSimulus time series generator that allows for realistic time-series CSV files to be created
