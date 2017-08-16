@@ -1,9 +1,11 @@
 package org.onoreak.timeSeries
 
 import java.io.{File, _}
-import java.util.Locale
+import java.text.DecimalFormat
+
 import be.cetic.tsimulus.config.Configuration
 import spray.json._
+
 import scala.io.Source
 import scala.util.control.Breaks.{break, breakable}
 
@@ -14,6 +16,11 @@ object CsvMain
 {
   def main(args: Array[String]): Unit =
   {
+    if (args.length < 2) {
+      println("Usage: uber-tssimulatorcontroller-1.0-SNAPSHOT.jar {path-to-config.json} {whole number of lines}")
+      return
+    }
+
     val content = Source .fromFile(new File(args(0)))
       .getLines()
       .mkString("\n")
@@ -29,11 +36,10 @@ object CsvMain
     var fileIter = 0;
     var file = new File("output - " + fileIter +  " .csv")
     var bw = new BufferedWriter(new FileWriter(file))
-    val formatter = java.text.NumberFormat.getNumberInstance(Locale.US);
-    formatter.setMaximumFractionDigits(3);
+    val formatter = new DecimalFormat("#.###");
     val t0 = 0;
 
-    while( i < 10000000) {
+    while( i < args(1).toInt) {
       val value = Utils.getTimeValue(config.timeSeries)
 
       var dataRow = ""
@@ -54,7 +60,8 @@ object CsvMain
             if (rem != 0) break
 
             if (j == 0) dataRow = dataRow + d._2 + ","
-            dataRow = dataRow + formatter.format(d._3.asInstanceOf[Option[Double]].getOrElse("****"))
+            val dataValue = formatter.format(d._3.asInstanceOf[Option[Double]].getOrElse("****"))
+            dataRow = dataRow + dataValue
             if (j != value.size - 1) dataRow = dataRow + ","
             else dataRow = dataRow + (util.Properties.lineSeparator)
           }

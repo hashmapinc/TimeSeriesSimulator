@@ -63,13 +63,6 @@
                 </executions>
                 <configuration>
                     <finalName>uber-${project.artifactId}-${project.version}</finalName>
-                    <artifactSet>
-                        <excludes>
-                            <exclude>junit:junit</exclude>
-                            <exclude>org.apache.spark:spark-core_2.10</exclude>
-                            <exclude>org.apache.spark:spark-streaming_2.10</exclude>
-                        </excludes>
-                    </artifactSet>
                     <filters>
                         <filter>
                             <artifact>*:*</artifact>
@@ -95,7 +88,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>be.cetic.Main</mainClass>
+                            <mainClass>org.onoreak.timeSeries.CsvMain</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
