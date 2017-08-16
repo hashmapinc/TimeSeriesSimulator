@@ -1,37 +1,78 @@
-### start zookeeper
-if you have installed zookeeper, start it, or
-run the command:
-``` sh
-bin/zookeeper-server-start.sh config/zookeeper.properties
-```
+<img src="https://hashmapinc.github.io/hashmap.github.io/images/tempus/Tempus_Black.png" width="250" height="306" alt="Hashmap, Inc Tempus"/>
 
-### start kafka with default configuration
-``` sh
-> bin/kafka-server-start.sh config/server.properties
-```
+# TimeSeries Simulator
+This is a wrapper around the TSimulus time series generator that allows for realistic time-series CSV files to be created
+for testing in a time series analysis system. It leverages the TSimulus generator configuration JSON. It outputs a CSV file 
+with columns that are representative of the exports in the JSON file. 
 
-### create a topic
-``` sh
-> bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 10 --topic test_topic
-```
+## Table of Contents
 
-### Build the code
-``` sh
-> mvn clean install
-```
+- [Features](#features)
+- [Requirements](#requirements)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [License](#license)
 
-### Run the Kafka Producer
-``` sh
-> mvn clean install
-```
+## Features
 
-### Run the Console Consumer
-``` sh
-> ./kafka-console-consumer.sh --zookeeper localhost:2181 --topic test_topic
-```
+This application aims to provide a few key features:
 
-### The simulator
-Run the KafkaProducer class with the arguments basicConfig.json {topic_name} {kafka broker}
-``` sh
-> 
-```
+* Realistic time series CSV file creation
+* Configurable file sizes
+
+## Requirements
+
+* JDK 1.8 at a minimum
+* Scala 2.11
+* Maven 3.1 or newer
+* Git client (to build locally)
+
+## Getting Started
+To build the library and get started first off clone the GitHub repository 
+
+    git clone https://github.com/hashmapinc/TimeSeriesSimulator.git
+
+Change directory into the WitsmlObjectsLibrary
+
+    cd TimeSeriesSimulator
+    
+Execute a maven clean install
+
+    mvn clean install
+    
+A Build success message should appear
+    
+    [INFO] ------------------------------------------------------------------------
+    [INFO] BUILD SUCCESS
+    [INFO] ------------------------------------------------------------------------
+    [INFO] Total time: 7.681 s
+    [INFO] Finished at: 2017-08-16T15:47:03-05:00
+    [INFO] Final Memory: 22M/327M
+    [INFO] ------------------------------------------------------------------------
+
+## Usage
+
+Copy the electicConfig.json from the resources directory to the target directory
+
+Change into the target directory and execute the uber jar with the following command
+
+    java -jar uber-tssimulatorcontroller-1.0-SNAPSHOT.jar electricConfig.json 100
+    
+A csv file names output - 0.csv should be created with the 100 values.
+
+## License
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+ 
+
