@@ -58,9 +58,9 @@ Copy the electicConfig.json from the resources directory to the target directory
 
 Change into the target directory and execute the uber jar with the following command
 
-    java -jar uber-tssimulatorcontroller-1.0-SNAPSHOT.jar electricConfig.json 100
+    java -jar uber-tssimulatorcontroller-1.0-SNAPSHOT.jar electricConfig.json
     
-A csv file names output - 0.csv should be created with the 100 values.
+A csv file names output - 0.csv should be created with the values.
 
 ## License
 
