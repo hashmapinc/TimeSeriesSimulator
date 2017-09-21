@@ -27,7 +27,7 @@ object CsvMain
       .getLines()
       .mkString("\n")
 
-    val dtf = DateTimeFormat.forPattern("YYYY-MM-dd HH:mm:ss.SSS")
+    val dtf = DateTimeFormat.longDateTime()
 
     val config = Configuration(content.parseJson)
     var file = new File("output - " + fileIter +  " .csv")
