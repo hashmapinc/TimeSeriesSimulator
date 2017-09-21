@@ -1,6 +1,8 @@
 package org.onoreak.timeSeries
 
 import java.io.{File, _}
+import java.time.format.DateTimeFormatter
+import java.time.{LocalDateTime, ZoneId, ZoneOffset}
 
 import be.cetic.tsimulus.Utils.{config2Results, generate}
 import be.cetic.tsimulus.config.Configuration
@@ -27,7 +29,7 @@ object CsvMain
       .getLines()
       .mkString("\n")
 
-    val dtf = DateTimeFormat.longDateTime()
+    val dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS")
 
     val config = Configuration(content.parseJson)
     var file = new File("output - " + fileIter +  " .csv")
@@ -35,11 +37,13 @@ object CsvMain
 
     bw.write("date,series,value\n")
 
-    generate(config2Results(config)) foreach (e => bw.write(dtf.print(e._1) + "," + e._2 + "," + e._3 + "\n"))
+    generate(config2Results(config)).foreach {e =>
+      var dt = LocalDateTime.parse(dtf.print(e._1), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"))
+      var zdt = dt.atZone(ZoneOffset.UTC)
+      bw.write(zdt.toInstant.toEpochMilli + "," + e._2 + "," + e._3 + "\n")
 
+    }
     bw.close()
     println("Done!")
-
-
   }
 }
